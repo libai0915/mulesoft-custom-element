@@ -30,7 +30,7 @@ http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/jso
       </when>
       <when expression="#[message.inboundProperties.'http.query.params'.type == 'string']">
         <set-payload value="i am a string" doc:name="Set Payload"/>
-        <flow-ref name="componentExample" doc:name="componentExample"/>
+        <flow-ref name="componentExample" doc:name="Flow Reference"/>
       </when>
       <otherwise>
         <logger message="Could not locate requested path" doc:name="Logger"/>
@@ -40,7 +40,14 @@ http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/jso
   </flow>
 
   <flow name="componentExample">
-        <component class="com.mulesoft.training.MuleComponent" doc:name="Java"/>
+        <component class="com.mulesoft.training.MuleComponent" doc:name="components"/>
+        <component doc:name="singleton">
+            <singleton-object class="com.mulesoft.training.MuleComponent"/>
+        </component>
+        <component class="com.mulesoft.training.MuleLifeCycleComponent" doc:name="components"/>
+        <component doc:name="singleton">
+            <singleton-object class="com.mulesoft.training.MuleLifeCycleComponent"/>
+        </component>
   </flow>
 
 </mule>

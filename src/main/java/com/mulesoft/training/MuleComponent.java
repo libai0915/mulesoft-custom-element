@@ -9,7 +9,12 @@ import java.util.List;
 import java.util.HashMap;
 
 public class MuleComponent {
-
+	int count;
+	
+	public MuleComponent() {
+		count = 1;
+	}
+	
 	public Map<String, String> processMap(Map<String, String> input) {
 		// processMap implementation
 		input.put("processed by", "processMap");
@@ -38,6 +43,8 @@ public class MuleComponent {
         output.put("message", input.toString());
         output.put("http method", method);
         output.put("processed by", "processAll");
+        output.put("curent count", count + "");
+        count++;    // components vs singleton
         return output;      
 	}
 
